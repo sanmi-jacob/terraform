@@ -35,3 +35,7 @@ variable "public_route" {
   type    = string
   default = "0.0.0.0/0"
 }
+
+variable "ec2_ssh_key" {
+  default = ""
+}
