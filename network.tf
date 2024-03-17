@@ -177,7 +177,7 @@ locals {
 
 //app security group
 module "ec2_default_app_security_groups" {
-  source = "../../../../../modules/security_group"
+  source = "./modules/security_group"
   name = "${var.purpose}_ec2_default_app_sg"
   description = "Default App SG for ec2 instances"
   tags = merge(local.common_tags)
