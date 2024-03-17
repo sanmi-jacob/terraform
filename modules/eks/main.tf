@@ -14,7 +14,8 @@ resource "aws_eks_cluster" "demo-eks" {
     security_group_ids = [var.security_group_id]
     subnet_ids     = var.subnet_id
     endpoint_private_access = true
-    endpoint_public_access = false
+    endpoint_public_access = true
+    public_access_cidrs = ["0.0.0.0/0"]
   }
   
 }

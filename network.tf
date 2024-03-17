@@ -165,3 +165,25 @@ module "security_groups_eks_node" {
   self_sg_ingress_rules = local.self_eks_node_ingress_rules_sg
   self_sg_egress_rules =  local.self_eks_node_egress_rules_sg
 }
+
+locals {
+    ec2_default_app_ingress_rules_sg = []
+    ec2_default_app_egress_rules_sg = []
+    ec2_default_app_sg_egress_rules = [
+    ]
+    ec2_default_app_egress_rules_pl_ids = []
+
+}
+
+//app security group
+module "ec2_default_app_security_groups" {
+  source = "../../../../../modules/security_group"
+  name = "${var.purpose}_ec2_default_app_sg"
+  description = "Default App SG for ec2 instances"
+  tags = merge(local.common_tags)
+  vpc_id = module.vpc.vpc_id
+  sg_egress_rules = local.ec2_default_app_sg_egress_rules
+  ingress_rules_source_sg = local.ec2_default_app_ingress_rules_sg
+  egress_rules_source_sg = local.ec2_default_app_egress_rules_sg
+ 
+} 

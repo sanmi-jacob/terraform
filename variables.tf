@@ -39,3 +39,13 @@ variable "public_route" {
 variable "ec2_ssh_key" {
   default = ""
 }
+
+data "aws_caller_identity" "current" {}
+
+variable "oidc_arn" {
+  default = "arn:aws:iam::372272712350:oidc-provider/oidc.eks.eu-west-2.amazonaws.com/id/BDA6DB5F31D0776D2020A304EFA31F20"
+}
+
+variable "oidc_url" {
+  default = "oidc.eks.eu-west-2.amazonaws.com/id/BDA6DB5F31D0776D2020A304EFA31F20"
+}

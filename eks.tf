@@ -316,13 +316,13 @@ resource "aws_iam_role" "alb_controller_role" {
         {
             "Effect": "Allow",
             "Principal": {
-                "Federated": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${module.eks.oidc_provider}"
+                "Federated": "${var.oidc_arn}"
             },
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "StringEquals": {
-                   "${module.eks.oidc_provider}:aud": "sts.amazonaws.com",
-                   "${module.eks.oidc_provider}:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
+                   "${var.oidc_url}:aud": "sts.amazonaws.com",
+                   "${var.oidc_url}:sub": "system:serviceaccount:kube-system:aws-load-balancer-controller"
                 }
             }
         }
