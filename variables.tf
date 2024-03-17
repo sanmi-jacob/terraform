@@ -37,7 +37,7 @@ variable "public_route" {
 }
 
 variable "ec2_ssh_key" {
-  default = ""
+  default = "cba_keypair"
 }
 
 data "aws_caller_identity" "current" {}
