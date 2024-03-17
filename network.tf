@@ -143,7 +143,7 @@ locals {
 
 //EKS SecurityGroup
 module "security_groups_eks" {
-  source   = "../../../../../modules/security_group"
+  source   = "./modules/security_group"
   name = "${var.purpose}_eks_sg"
   description = "Cluster communication with worker nodes"
   tags     = merge(local.common_tags)
@@ -155,7 +155,7 @@ module "security_groups_eks" {
 
 //Node SecurityGroup
 module "security_groups_eks_node" {
-  source   = "../../../../../modules/security_group"
+  source   = "./modules/security_group"
   name = "${var.purpose}_eks_node_sg"
   description = "Node communication with EKS Cluster"
   tags     = merge(local.common_tags, { "kubernetes.io/cluster/${var.purpose}_cluster" = "owned" },local.karpenter_tags)
