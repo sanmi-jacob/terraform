@@ -24,7 +24,7 @@ module "private_subnet" {
 }
 
 module "private_route_table_and_association" {
-  source     = "../../../../../modules/networking/route_table"
+  source     = "./modules/networking/route_table"
   env   = "${var.purpose}_${var.environment}"
   type       = var.private_subnet_type
   tags       = merge(local.common_tags)
@@ -37,7 +37,7 @@ module "private_route_table_and_association" {
 }
 
 module "public_route_table_and_association" {
-  source     = "../../../../../modules/networking/route_table"
+  source     = "./modules/networking/route_table"
   env   = "${var.purpose}_${var.environment}"
   type       = var.public_subnet_type
   tags       = merge(local.common_tags)
@@ -61,7 +61,7 @@ locals {
 
 }
 module "private_nacl" {
-  source = "../../../../../modules/networking/nacl"
+  source = "./modules/networking/nacl"
   name   = "${var.purpose}_private_nacl"
   vpc_id   = module.vpc.vpc_id
   tags     = merge(local.common_tags)
@@ -78,7 +78,7 @@ locals {
   ]
 }
 module "public_nacl" {
-  source = "../../../../../modules/networking/nacl"
+  source = "./modules/networking/nacl"
   name   = "${var.purpose}_public_nacl"
   vpc_id   = module.vpc.vpc_id
   subnet_id     = module.public_subnet.subnet_ids
@@ -89,14 +89,14 @@ module "public_nacl" {
 
 //gateways
 module "igw" {
-  source   = "../../../../../modules/networking/internet_gw"
+  source   = "./modules/networking/internet_gw"
   env = "${var.purpose}"
   tags     = merge(local.common_tags)
   vpc_id   = module.vpc.vpc_id
 }
 
 module "nat_gw" {
-  source        = "../../../../../modules/networking/nat_gw"
+  source        = "./modules/networking/nat_gw"
   env_name      = "${var.purpose}"
   tags          = merge(local.common_tags)
   elastic_ip_id = module.elasticip.eip_id
@@ -106,7 +106,7 @@ module "nat_gw" {
 }
 //EIP
 module "elasticip" {
-  source   = "../../../../../modules/networking/elastic_ip"
+  source   = "./modules/networking/elastic_ip"
   env_name = "${var.purpose}"
   tags     = merge(local.common_tags)
 }
